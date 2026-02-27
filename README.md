@@ -1,2 +1,2 @@
 # Pathsum
-Did this binary tree problem today
+Modified the code in an effective way
