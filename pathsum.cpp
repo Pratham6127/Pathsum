@@ -1,4 +1,5 @@
 #include <iostream>
+#include <queue>
 using namespace std;
 
 struct TreeNode {
@@ -29,19 +30,38 @@ bool hasPathSum(TreeNode* root, int sum) {
 }
 
 int main() {
-    TreeNode* root = new TreeNode(5);
-    root->left = new TreeNode(4);
-    root->right = new TreeNode(8);
+    int rootVal;
+    cin >> rootVal;
 
-    root->left->left = new TreeNode(11);
-    root->left->left->left = new TreeNode(7);
-    root->left->left->right = new TreeNode(2);
+    if (rootVal == -1) {
+        cout << "false";
+        return 0;
+    }
 
-    root->right->left = new TreeNode(13);
-    root->right->right = new TreeNode(4);
-    root->right->right->right = new TreeNode(1);
+    TreeNode* root = new TreeNode(rootVal);
+    queue<TreeNode*> q;
+    q.push(root);
 
-    int targetSum = 22;
+    while (!q.empty()) {
+        TreeNode* curr = q.front();
+        q.pop();
+
+        int leftVal, rightVal;
+        cin >> leftVal >> rightVal;
+
+        if (leftVal != -1) {
+            curr->left = new TreeNode(leftVal);
+            q.push(curr->left);
+        }
+
+        if (rightVal != -1) {
+            curr->right = new TreeNode(rightVal);
+            q.push(curr->right);
+        }
+    }
+
+    int targetSum;
+    cin >> targetSum;
 
     cout << (hasPathSum(root, targetSum) ? "true" : "false");
 
